@@ -1,0 +1,439 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>災害対策アプリ</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="{% static 'startbootstrap-stylish-portfolio-gh-pages/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+  <!-- Custom Fonts -->
+  <link href="{% static 'startbootstrap-stylish-portfolio-gh-pages/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href="{% static 'startbootstrap-stylish-portfolio-gh-pages/vendor/simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="{% static 'startbootstrap-stylish-portfolio-gh-pages/css/stylish-portfolio.min.css' %}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <a class="menu-toggle rounded" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a class="js-scroll-trigger" href="#page-top">災害対策アプリ</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#page-top">ホーム</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#about">このサイトについて</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#services">構成要素</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#function">機能概要</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#map">避難所MAP</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header class="masthead d-flex">
+    <div class="container text-center my-auto">
+      <h1 class="mb-1">災害対策アプリ</h1>
+      <h3 class="mb-5">
+        <em>大切な命を守るために</em>
+      </h3>
+     
+    </div>
+    <div class="overlay"></div>
+  </header>
+
+  <!-- About -->
+  <section class="content-section bg-light" id="about">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <h2>GeoDjangoを用いた避難所マップWebアプリ</h2>
+          <p class="lead mb-5">大切な命を守るために</p>
+          <a class="btn btn-dark btn-xl js-scroll-trigger w-170px" href="#services">構成要素</a>
+          <a class="btn btn-dark btn-xl js-scroll-trigger w-170px" href="#function">機能概要</a>
+          <a class="btn btn-dark btn-xl js-scroll-trigger w-170px" href="#map">避難所MAP</a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="content-section bg-primary text-white text-center" id="services">
+    <div class="container">
+      <div class="content-section-heading">
+        <h2 class="mb-5">構成要素</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="fas fa-mobile-alt"></i>
+          </span>
+          <h4>
+            <strong>Django</strong>
+          </h4>
+          <p class="text-faded mb-0">Djangoバージョン3.x</p>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="fas fa-database"></i>
+          </span>
+          <h4>
+            <strong>PostgreSQL & <br>PostGis</strong>
+          </h4>
+          <p class="text-faded mb-0">PostgreSQL10+PostGis2.4</p>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="fab fa-google"></i>
+          </span>
+          <h4>
+            <strong>Google Map API</strong>
+          </h4>
+          <p class="text-faded mb-0">
+            Directions API<br>
+            Maps Elevation API<br>
+            Maps JavaScript API</p>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="fab fa-aws"></i>
+          </span>
+          <h4>
+            <strong>render</strong>
+          </h4>
+          <p class="text-faded mb-0">EC2<br>windows11<br><br></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Portfolio -->
+  <section class="content-section" id="function">
+    <div class="container">
+      <div class="content-section-heading text-center">
+       <!-- <h3 class="text-secondary mb-0">Portfolio</h3>-->
+        <h2 class="mb-5">機能概要</h2>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-lg-6">
+          <a class="portfolio-item" href="#function">
+            <span class="caption">
+              <span class="caption-content">
+                <p>現在地を自動取得</p>
+                <p>Geolocation API で現在の位置情報を取得してGoogleMapにマーカーを表示。</p>
+              </span>
+            </span>
+            <img class="img-fluid" src="{% static 'startbootstrap-stylish-portfolio-gh-pages/img/street-map.jpg' %}" alt="">
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <a class="portfolio-item" href="#function">
+            <span class="caption">
+              <span class="caption-content">
+                <p>避難所をマッピング</p>
+                <p>G空間情報センターで公開されている指定緊急避難場所をGoogleMapにマーカー表示。
+                </p>
+              </span>
+            </span>
+            <img class="img-fluid" src="{% static 'startbootstrap-stylish-portfolio-gh-pages/img/street-map.jpg' %}" alt="">
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <a class="portfolio-item" href="#function">
+            <span class="caption">
+              <span class="caption-content">
+                <p>最短経路の表示</p>
+                <p class="mb-0">避難所のマーカーをクリックすると現在地からの最短経路を表示。</p>
+              </span>
+            </span>
+            <img class="img-fluid" src="{% static 'startbootstrap-stylish-portfolio-gh-pages/img/street-map.jpg' %}" alt="">
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <a class="portfolio-item" href="#function">
+            <span class="caption">
+              <span class="caption-content">
+                <p>移動距離の表示</p>
+                <p class="mb-0">最短経路と合わせて移動距離(キロメートル)と時間（分）を表示。</p>
+              </span>
+            </span>
+            <img class="img-fluid" src="{% static 'startbootstrap-stylish-portfolio-gh-pages/img/street-map.jpg' %}" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Map -->
+
+  <div class="content-section-heading text-center">
+    <!-- <h3 class="text-secondary mb-0">Portfolio</h3>-->
+    <h2 class="mb-5">避難所MAP</h2>
+  </div>
+
+
+  <section class="content-section" id="map">
+    <div class="container">
+      <div class="content-section-heading text-center">
+       <!-- <h3 class="text-secondary mb-0">Portfolio</h3>-->
+       
+      </div>
+
+
+     
+  <section id="contact" class="map">
+
+
+    <div id="map"></div>
+    <script>
+        var currentLat;
+    var currentLng;
+    var currentBearing;
+    var directionsRenderer;
+    var directionsService;
+    var transitInfoDiv = document.getElementById('transitInfo');
+    var marker = [];
+    var infoWindow = [];
+    var bearingDiv = document.getElementById('bearing');
+    var currentLocationTabDiv = document.getElementById('currentLocationTab'); // 追加
+
+    // カスタムタブのクラス
+    function CustomLocationTab(controlDiv, map, content) {
+      controlDiv.style.padding = '40px';
+      controlDiv.style.backgroundColor = 'white';
+      controlDiv.style.border = '3px solid #ccc';
+      controlDiv.style.cursor = 'pointer';
+      controlDiv.style.fontSize = '32px';
+      controlDiv.style.fontWeight = 'bold';
+      controlDiv.innerHTML = content;
+
+      google.maps.event.addDomListener(controlDiv, 'click', function () {
+        // タブがクリックされたときの処理をここに追加
+        // 例えば、他の要素の表示/非表示切り替えなど
+      });
+    }
+
+    // カスタムタブを地図に追加
+    function addCustomLocationTab(content) {
+      var customTabControlDiv = document.createElement('div');
+      var customTabControl = new CustomLocationTab(customTabControlDiv, map, content);
+      customTabControlDiv.index = 1;
+      map.controls[google.maps.ControlPosition.TOP_RIGHT].push(customTabControlDiv);
+    }
+
+    // マーカーにクリックイベントを追加
+    function markerEvent(marker, infoWindow, lat, lng, c_lat, c_lng, location) {
+      marker.addListener('click', function () {
+        var start = new google.maps.LatLng(currentLat, currentLng);
+        var goal = new google.maps.LatLng(lat, lng);
+        infoWindow.open(map, marker);
+
+        var request = {
+          origin: start,
+          destination: goal,
+          travelMode: google.maps.TravelMode.WALKING
+        };
+
+        directionsService.route(request, function (result, status) {
+          if (status == google.maps.DirectionsStatus.OK) {
+            directionsRenderer.setDirections(result);
+
+            // 移動時間と距離を取得
+            var distance = result.routes[0].legs[0].distance.text;
+            var duration = result.routes[0].legs[0].duration.text;
+
+            // 吹き出しの中に表示
+            var content = '<div>' + location + '</div>';
+            content += '<div>距離: ' + distance + '</div>';
+            content += '<div>所要時間徒歩: ' + duration + '</div>';
+            infoWindow.setContent(content);
+          }
+        });
+      });
+    }
+
+    // マップ初期化
+    function initMap(lat, lng) {
+      currentLat = lat;
+      currentLng = lng;
+
+      var center = { lat: lat, lng: lng };
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 16,
+        center: center,
+      });
+
+      directionsService = new google.maps.DirectionsService();
+      directionsRenderer = new google.maps.DirectionsRenderer();
+      directionsRenderer.setMap(map);
+
+      // 現在地のマーカーを追加
+      var currentLocationMarker = new google.maps.Marker({
+        position: center,
+        map: map,
+        icon: {
+          url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+          scaledSize: new google.maps.Size(50, 50)
+        }
+      });
+
+      // 現在地情報を表示するカスタムタブを追加
+      var currentLocationTabContent = '<div>方角: ' + currentBearing + '度</div>';
+      currentLocationTabContent += '<div>まっすぐ進んでください</div>';
+      currentLocationTabContent += '<div>現在地: 緯度 ' + lat + ', 経度 ' + lng + '</div>';
+      addCustomLocationTab(currentLocationTabContent);
+
+      // ここからDjangoのviews.pyからオブジェクトを取得してループ
+      var marker = [];
+      var infoWindow = [];
+      {% for object in object_list %}
+        marker[{{ forloop.counter0 }}] = new google.maps.Marker({
+          position: { lat: {{ object.geom.y }}, lng: {{ object.geom.x }} },
+          map: map
+        });
+        infoWindow[{{ forloop.counter0 }}] = new google.maps.InfoWindow({
+          content: '<div>' + '{{ object.evacuation_site }}' + '</div>'
+        });
+        markerEvent(marker[{{ forloop.counter0 }}], infoWindow[{{ forloop.counter0 }}], {{ object.geom.y }}, {{ object.geom.x }}, lat, lng, '{{ object.evacuation_site }}');
+      {% endfor %}
+
+      window.addEventListener('deviceorientation', function (event) {
+        currentBearing = event.alpha;
+        bearingDiv.innerText = '方角: ' + currentBearing + '度';
+        updateDirections();
+      });
+
+      function updateDirections() {
+        var directionsDiv = document.getElementById('directions');
+        var targetBearing = getBearingToDestination();
+        var directionText = getDirectionText(currentBearing, targetBearing);
+        directionsDiv.innerText = directionText;
+      }
+
+      function getBearingToDestination() {
+        var destination = new google.maps.LatLng(lat, lng);
+        var lat1 = currentLat * (Math.PI / 180);
+        var lon1 = currentLng * (Math.PI / 180);
+        var lat2 = destination.lat() * (Math.PI / 180);
+        var lon2 = destination.lng() * (Math.PI / 180);
+        var dLon = lon2 - lon1;
+        var y = Math.sin(dLon) * Math.cos(lat2);
+        var x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+        var bearing = Math.atan2(y, x) * (180 / Math.PI);
+        bearing = (bearing + 360) % 360;
+        return bearing;
+      }
+
+      function getDirectionText(currentBearing, targetBearing) {
+        var angleDifference = Math.abs(targetBearing - currentBearing);
+        if (angleDifference < 22.5) {
+          return "まっすぐ進んでください";
+        } else if (angleDifference < 67.5) {
+          return "左に曲がってください";
+        } else if (angleDifference < 112.5) {
+          return "Uターンしてください";
+        } else if (angleDifference < 157.5) {
+          return "右に曲がってください";
+        } else {
+          return "まっすぐ進んでください";
+        }
+      }
+    }
+
+    // 位置情報取得
+    function getPosition() {
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          initMap(position.coords.latitude, position.coords.longitude);
+        }
+      );
+    }
+
+    // Google Maps API スクリプト読み込み
+    function loadMapScript() {
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = 'https://maps.googleapis.com/maps/api/js?key=&callback=getPosition';
+      document.body.appendChild(script);
+    }
+
+    loadMapScript();
+ 
+    </script>
+  </section>
+
+</div>
+</section>
+
+
+  <!-- Footer -->
+  <footer class="footer text-center">
+    <div class="container">
+      <ul class="list-inline mb-5">
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white mr-3" href="#">
+            <i class="icon-social-facebook"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white mr-3" href="#">
+            <i class="icon-social-twitter"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white" href="#">
+            <i class="icon-social-github"></i>
+          </a>
+        </li>
+      </ul>
+      <p class="text-muted small mb-0">Copyright &copy; Eisuke Kainuma 2024</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'startbootstrap-stylish-portfolio-gh-pages/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'startbootstrap-stylish-portfolio-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="{% static 'startbootstrap-stylish-portfolio-gh-pages/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="{% static 'startbootstrap-stylish-portfolio-gh-pages/js/stylish-portfolio.min.js' %}"></script>
+
+</body>
+
+</html>

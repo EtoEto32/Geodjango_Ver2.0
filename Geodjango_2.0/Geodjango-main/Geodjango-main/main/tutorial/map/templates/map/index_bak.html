@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8" />
+  <title>緊急避難場所マップ</title>
+</head>
+
+<body>
+  <h1>緊急避難場所マップ</h1>
+
+  <div id="map" style="width: 700px; height: 500px"></div>
+  <div id="info">
+    <p id="bearing">方角: </p>
+    <div id="directions"></div>
+    <div id="transitInfo"></div>
+    <div id="currentLocationTab"></div> <!-- カスタムタブ表示用のコンテナ -->
+  </div>
+
+  <script>
+    var currentLat;
+    var currentLng;
+    var currentBearing;
+    var directionsRenderer;
+    var directionsService;
+    var transitInfoDiv = document.getElementById('transitInfo');
+    var marker = [];
+    var infoWindow = [];
+    var bearingDiv = document.getElementById('bearing');
+    var currentLocationTabDiv = document.getElementById('currentLocationTab'); // 追加
+
+    // カスタムタブのクラス
+    function CustomLocationTab(controlDiv, map, content) {
+      controlDiv.style.padding = '40px';
+      controlDiv.style.backgroundColor = 'white';
+      controlDiv.style.border = '3px solid #ccc';
+      controlDiv.style.cursor = 'pointer';
+      controlDiv.style.fontSize = '32px';
+      controlDiv.style.fontWeight = 'bold';
+      controlDiv.innerHTML = content;
+
+      google.maps.event.addDomListener(controlDiv, 'click', function () {
+        // タブがクリックされたときの処理をここに追加
+        // 例えば、他の要素の表示/非表示切り替えなど
+      });
+    }
+
+    // カスタムタブを地図に追加
+    function addCustomLocationTab(content) {
+      var customTabControlDiv = document.createElement('div');
+      var customTabControl = new CustomLocationTab(customTabControlDiv, map, content);
+      customTabControlDiv.index = 1;
+      map.controls[google.maps.ControlPosition.TOP_RIGHT].push(customTabControlDiv);
+    }
+
+    // マーカーにクリックイベントを追加
+    function markerEvent(marker, infoWindow, lat, lng, c_lat, c_lng, location) {
+      marker.addListener('click', function () {
+        var start = new google.maps.LatLng(currentLat, currentLng);
+        var goal = new google.maps.LatLng(lat, lng);
+        infoWindow.open(map, marker);
+
+        var request = {
+          origin: start,
+          destination: goal,
+          travelMode: google.maps.TravelMode.WALKING
+        };
+
+        directionsService.route(request, function (result, status) {
+          if (status == google.maps.DirectionsStatus.OK) {
+            directionsRenderer.setDirections(result);
+
+            // 移動時間と距離を取得
+            var distance = result.routes[0].legs[0].distance.text;
+            var duration = result.routes[0].legs[0].duration.text;
+
+            // 吹き出しの中に表示
+            var content = '<div>' + location + '</div>';
+            content += '<div>距離: ' + distance + '</div>';
+            content += '<div>所要時間徒歩: ' + duration + '</div>';
+            infoWindow.setContent(content);
+          }
+        });
+      });
+    }
+
+    // マップ初期化
+    function initMap(lat, lng) {
+      currentLat = lat;
+      currentLng = lng;
+
+      var center = { lat: lat, lng: lng };
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 16,
+        center: center,
+      });
+
+      directionsService = new google.maps.DirectionsService();
+      directionsRenderer = new google.maps.DirectionsRenderer();
+      directionsRenderer.setMap(map);
+
+      // 現在地のマーカーを追加
+      var currentLocationMarker = new google.maps.Marker({
+        position: center,
+        map: map,
+        icon: {
+          url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+          scaledSize: new google.maps.Size(50, 50)
+        }
+      });
+
+      // 現在地情報を表示するカスタムタブを追加
+      var currentLocationTabContent = '<div>方角: ' + currentBearing + '度</div>';
+      currentLocationTabContent += '<div>まっすぐ進んでください</div>';
+      currentLocationTabContent += '<div>現在地: 緯度 ' + lat + ', 経度 ' + lng + '</div>';
+      addCustomLocationTab(currentLocationTabContent);
+
+      // ここからDjangoのviews.pyからオブジェクトを取得してループ
+      var marker = [];
+      var infoWindow = [];
+      {% for object in object_list %}
+        marker[{{ forloop.counter0 }}] = new google.maps.Marker({
+          position: { lat: {{ object.geom.y }}, lng: {{ object.geom.x }} },
+          map: map
+        });
+        infoWindow[{{ forloop.counter0 }}] = new google.maps.InfoWindow({
+          content: '<div>' + '{{ object.evacuation_site }}' + '</div>'
+        });
+        markerEvent(marker[{{ forloop.counter0 }}], infoWindow[{{ forloop.counter0 }}], {{ object.geom.y }}, {{ object.geom.x }}, lat, lng, '{{ object.evacuation_site }}');
+      {% endfor %}
+
+      window.addEventListener('deviceorientation', function (event) {
+        currentBearing = event.alpha;
+        bearingDiv.innerText = '方角: ' + currentBearing + '度';
+        updateDirections();
+      });
+
+      function updateDirections() {
+        var directionsDiv = document.getElementById('directions');
+        var targetBearing = getBearingToDestination();
+        var directionText = getDirectionText(currentBearing, targetBearing);
+        directionsDiv.innerText = directionText;
+      }
+
+      function getBearingToDestination() {
+        var destination = new google.maps.LatLng(lat, lng);
+        var lat1 = currentLat * (Math.PI / 180);
+        var lon1 = currentLng * (Math.PI / 180);
+        var lat2 = destination.lat() * (Math.PI / 180);
+        var lon2 = destination.lng() * (Math.PI / 180);
+        var dLon = lon2 - lon1;
+        var y = Math.sin(dLon) * Math.cos(lat2);
+        var x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+        var bearing = Math.atan2(y, x) * (180 / Math.PI);
+        bearing = (bearing + 360) % 360;
+        return bearing;
+      }
+
+      function getDirectionText(currentBearing, targetBearing) {
+        var angleDifference = Math.abs(targetBearing - currentBearing);
+        if (angleDifference < 22.5) {
+          return "まっすぐ進んでください";
+        } else if (angleDifference < 67.5) {
+          return "左に曲がってください";
+        } else if (angleDifference < 112.5) {
+          return "Uターンしてください";
+        } else if (angleDifference < 157.5) {
+          return "右に曲がってください";
+        } else {
+          return "まっすぐ進んでください";
+        }
+      }
+    }
+
+    // 位置情報取得
+    function getPosition() {
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          initMap(position.coords.latitude, position.coords.longitude);
+        }
+      );
+    }
+
+    // Google Maps API スクリプト読み込み
+    function loadMapScript() {
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = 'https://maps.googleapis.com/maps/api/js?key=&callback=getPosition';
+      document.body.appendChild(script);
+    }
+
+    loadMapScript();
+  </script>
+</body>
+
+</html>
