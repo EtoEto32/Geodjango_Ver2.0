@@ -1,4 +1,3 @@
-
-
-Uploading 災害対策アプリ - Google Chrome 2024-04-27 19-59-56.mp4…
+#サンプル動画  
+https://github.com/EtoEto32/Geodjango_Ver2.0/assets/148045186/d6c8c689-8ac9-4ab3-bb22-a32bc417d701
 
